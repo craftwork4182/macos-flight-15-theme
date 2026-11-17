@@ -33,7 +33,7 @@ The colours are those of Omarchy's built-in Starship theme, so it feels the same
 
 ## Status
 
-Every background is free of the webcast clock and telemetry, and each intro runs 4 to 7 seconds, slowing into its final frame. Coming in updates (`omarchy theme update`): more shots from the flight. The best of these are proposed for Omarchy's own Starship theme in [omacom/omarchy#18905](https://github.com/omacom/omarchy/pull/18905).
+Every background is free of the webcast clock and telemetry, and each intro runs 4 to 7 seconds, slowing into its final frame. Coming in updates (`omarchy theme update`): more shots from the flight.
 
 ## Credits
 
