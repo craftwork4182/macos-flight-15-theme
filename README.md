@@ -1,6 +1,6 @@
 # Flight 15
 
-An [Omarchy](https://omarchy.org) theme made from Starship Flight 15: eleven backgrounds in flight order, from ignition on the pad to Ship 42 held by the tower's chopsticks, and each one opens with its own intro, a real shot from the flight that ends exactly on the still.
+An [Omarchy](https://omarchy.org) theme made from Starship Flight 15: twelve backgrounds in flight order, from ignition on the pad to Ship 42 held by the tower's chopsticks, and each one opens with its own intro, a real shot from the flight that ends exactly on the still.
 
 ## Install
 
@@ -26,7 +26,8 @@ Then pick it under Style > Theme, and step through the backgrounds with `Super +
 | 08 | `08-onboard-ship-looking-down` | Onboard Ship 42, looking down at the pad |
 | 09 | `09-onboard-flip-over-starbase` | The next day: riding on Ship 42 down through the clouds and into the flip over Starbase |
 | 10 | `10-landing-burn-beside-tower` | Ship 42 comes home on its engines and stops beside the tower |
-| 11 | `11-caught-at-the-tower` | Ship 42 held by the tower's chopsticks (slowed 1.5x) |
+| 11 | `11-into-the-chopsticks` | From the tower: Ship 42 comes down into the chopsticks on its engines |
+| 12 | `12-caught-at-the-tower` | Ship 42 held by the tower's chopsticks (slowed 1.5x) |
 
 The colours are those of Omarchy's built-in Starship theme, so it feels the same with flight footage on the desktop.
 
