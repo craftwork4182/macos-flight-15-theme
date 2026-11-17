@@ -8,7 +8,7 @@ An [Omarchy](https://omarchy.org) theme made from Starship Flight 15: twelve bac
 omarchy theme install https://github.com/yamz8/omarchy-flight-15-theme
 ```
 
-The download is about 340 MB: every background is a lossless 4K still and every intro a high-quality 4K video.
+The download is about 360 MB: every background is a lossless 4K still and every intro a high-quality 4K video.
 
 Then pick it under Style > Theme, and step through the backgrounds with `Super + Ctrl + W`. Every background plays its intro when you select it.
 
