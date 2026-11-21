@@ -6,11 +6,13 @@ Watch Starship lift off, climb through the plume and return to the tower. Flight
 
 ## Install
 
-1. On a Mac running **macOS 13 Ventura or later**, extract the Flight 15 installer ZIP or download the full repository using **Code → Download ZIP**. The compact installer downloads about 325 MiB of media during installation and checks every file against its checksum. A full checkout or repository ZIP includes the media and works offline.
-2. Open **Install Flight 15.command** in the extracted folder. You can also run `bash "./Install Flight 15.command"` from that folder in Terminal. The installer uses tools included with macOS to build **Flight 15.app** in your home **Applications** folder. It bundles the clips and converts the original WebP stills to lossless PNGs.
+1. On a Mac running **macOS 13 Ventura or later**, [download the theme ZIP](https://github.com/craftwork4182/macos-flight-15-theme/archive/refs/heads/main.zip). It includes all twelve scenes (about 324 MiB). In Finder, open **Downloads** and double-click the ZIP if your browser hasn’t already extracted it.
+2. Open the extracted **macos-flight-15-theme-main** folder and double-click **Install Flight 15.command**. Alternatively, open Terminal, type `bash` followed by a space, drag the installer file into the Terminal window, and press **Return**. It builds **Flight 15.app** in your home **Applications** folder using tools included with macOS.
 3. Choose a scene and click **Set Wallpaper**. Open **Flight 15** again from Spotlight or Finder to change it. The picker preselects the next scene in flight order and wraps from the tower catch back to ignition.
 
 The clip plays behind your windows and desktop icons, then the app quits and macOS keeps the still. To see the whole scene, show your desktop. Uncheck **Play the matching intro** for an instant change. Flight 15 also follows **System Settings → Accessibility → Display → Reduce motion**.
+
+If you have the compact installer ZIP, open the **Flight 15 for macOS** folder instead. Its installer downloads and verifies the original media.
 
 The picker sets the wallpaper on the current desktop Space of each connected display. Open it in another Space to apply a scene there. For automatic rotation of the stills, click **Show Theme Files** and add its **Wallpapers** folder in **System Settings → Wallpaper**.
 
@@ -42,9 +44,13 @@ Click **Show Theme Files** in the picker, then open **Profiles**. The same two f
 
 </details>
 
-## Remove or update
+## Restore the macOS desktop
 
-To remove the app, choose another wallpaper in System Settings, then move `~/Applications/Flight 15.app` to the Trash. You can remove imported terminal profiles separately in the terminal app’s settings. To update, run the installer from the newer copy of the theme.
+1. Open **Apple menu  → System Settings → Wallpaper**. Choose the built-in Apple wallpaper for your macOS version, or reselect your previous picture. For the day and night versions of a dynamic wallpaper, choose **Dynamic** if offered. Use **Show on all Spaces** if available, or repeat on each desktop or display where you applied Flight 15.
+2. If you manually changed the system colors, go to **System Settings → Appearance**. Choose your previous appearance, or **Auto** for automatic light and dark mode. Under **Color** (called **Accent color** on earlier versions), choose the multicolored option or your previous color.
+3. If you made Flight 15 your Terminal default, open **Terminal → Settings → Profiles**, select **Basic** or your previous profile, click **Default**, and open a new window. In iTerm2, choose your previous preset under **Settings → Profiles → Colors → Color Presets** if you changed it.
+
+Choosing another wallpaper is enough if you only used the scene picker. To uninstall afterward, open Finder, press **Shift–Command–G**, enter `~/Applications`, and move **Flight 15.app** to the Trash. To update the theme, run the installer from a newer download.
 
 ## Credits
 
