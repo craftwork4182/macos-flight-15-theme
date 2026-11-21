@@ -1,18 +1,29 @@
-# Flight 15
+# Flight 15 for macOS
 
-An [Omarchy](https://omarchy.org) theme made from Starship Flight 15: twelve backgrounds in flight order, from ignition on the pad to Ship 42 held by the tower's chopsticks, and each one opens with its own intro, a real shot from the flight that ends exactly on the still.
+Watch Starship lift off, climb through the plume and return to the tower. Flight 15 brings all twelve scenes from [yamz8’s Omarchy theme](https://github.com/yamz8/omarchy-flight-15-theme) to the Mac. Each scene has a silent 4K intro that settles into its matching wallpaper. The included Terminal and iTerm2 profiles use the original Starship palette.
+
+![Scene 06, Starship climbing through the plume in golden light](backgrounds/06-golden-hour-climb.webp)
 
 ## Install
 
-```
-omarchy theme install https://github.com/yamz8/omarchy-flight-15-theme
-```
+1. On a Mac running **macOS 13 Ventura or later**, extract the Flight 15 installer ZIP or download the full repository using **Code → Download ZIP**. The compact installer downloads about 325 MiB of media during installation and checks every file against its checksum. A full checkout or repository ZIP includes the media and works offline.
+2. Open **Install Flight 15.command** in the extracted folder. You can also run `bash "./Install Flight 15.command"` from that folder in Terminal. The installer uses tools included with macOS to build **Flight 15.app** in your home **Applications** folder. It bundles the clips and converts the original WebP stills to lossless PNGs.
+3. Choose a scene and click **Set Wallpaper**. Open **Flight 15** again from Spotlight or Finder to change it. The picker preselects the next scene in flight order and wraps from the tower catch back to ignition.
 
-The download is about 360 MB: every background is a lossless 4K still and every intro a high-quality 4K video.
+The clip plays behind your windows and desktop icons, then the app quits and macOS keeps the still. To see the whole scene, show your desktop. Uncheck **Play the matching intro** for an instant change. Flight 15 also follows **System Settings → Accessibility → Display → Reduce motion**.
 
-Then pick it under Style > Theme, and step through the backgrounds with `Super + Ctrl + W`. Every background plays its intro when you select it.
+The picker sets the wallpaper on the current desktop Space of each connected display. Open it in another Space to apply a scene there. For automatic rotation of the stills, click **Show Theme Files** and add its **Wallpapers** folder in **System Settings → Wallpaper**.
 
-## Backgrounds
+## Terminal and appearance
+
+Click **Show Theme Files** in the picker, then open **Profiles**. The same two files are also in [macos/Profiles](macos/Profiles).
+
+- **Terminal** — Open **Flight 15.terminal** to try the profile in a new window. To use it for new sessions, select **Flight 15** in **Terminal → Settings → Profiles** and click **Default**.
+- **iTerm2** — In **Settings → Profiles → Colors → Color Presets**, choose **Import**, select **Flight 15.itermcolors**, then choose **Flight 15** from the presets.
+- **macOS controls** — For matching window and menu colors, choose **Dark** appearance and the **Orange** accent in **System Settings → Appearance**.
+
+<details>
+<summary>Explore all twelve scenes</summary>
 
 | # | Background | Shot |
 | --- | --- | --- |
@@ -29,12 +40,12 @@ Then pick it under Style > Theme, and step through the backgrounds with `Super +
 | 11 | `11-into-the-chopsticks` | From the tower: Ship 42 comes down into the chopsticks on its engines |
 | 12 | `12-caught-at-the-tower` | Ship 42 held by the tower's chopsticks (slowed 1.5x) |
 
-The colours are those of Omarchy's built-in Starship theme, so it feels the same with flight footage on the desktop.
+</details>
 
-## Status
+## Remove or update
 
-Every background is free of the webcast clock and telemetry, and each intro runs 4 to 7 seconds, slowing into its final frame. Coming in updates (`omarchy theme update`): more shots from the flight.
+To remove the app, choose another wallpaper in System Settings, then move `~/Applications/Flight 15.app` to the Trash. You can remove imported terminal profiles separately in the terminal app’s settings. To update, run the installer from the newer copy of the theme.
 
 ## Credits
 
-Footage: SpaceX, Starship Flight 15. See [NOTICE.md](NOTICE.md). Not affiliated with or endorsed by SpaceX. The repository's own files (README, NOTICE, LICENSE and the preview) are MIT licensed, see [LICENSE](LICENSE); the footage is not, and `colors.toml` comes from Omarchy under its own MIT licence.
+The scene selection, video edits and matching stills are by **yamz8**. The underlying SpaceX footage remains subject to SpaceX’s rights. See [NOTICE.md](NOTICE.md) for sources and editing details. The Starship palette comes from [Omarchy](https://github.com/omacom/omarchy) under its MIT license. The macOS scripts and profile generation code use the repository’s [MIT license](LICENSE).

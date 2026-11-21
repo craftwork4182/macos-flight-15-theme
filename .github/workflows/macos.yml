@@ -1,0 +1,16 @@
+name: Check the macOS theme
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  theme:
+    runs-on: macos-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build the application bundle
+        run: bash "./Install Flight 15.command" --build "$RUNNER_TEMP/theme"
+      - name: Check the bundle with AppKit and AVFoundation
+        run: |
+          cat macos/Flight15.js tests/native-smoke.js > "$RUNNER_TEMP/check.js"
+          osascript -l JavaScript "$RUNNER_TEMP/check.js" "$RUNNER_TEMP/theme/Flight 15.app"
