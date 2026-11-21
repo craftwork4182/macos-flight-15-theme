@@ -1,8 +1,5 @@
 // JavaScript for Automation, compiled into a macOS applet by osacompile.
 ObjC.import('AppKit');
-ObjC.import('AVFoundation');
-ObjC.import('CoreGraphics');
-ObjC.import('QuartzCore');
 
 function sceneNames(resources) {
     const folder = resources.URLByAppendingPathComponent('Wallpapers');
@@ -67,11 +64,21 @@ function applyWallpaper(url, screens) {
 // Each display needs its own player: a player shared by several layers may
 // render on only one of them. Keep the windows below Finder's desktop icons.
 function introWindow(url, screen) {
-    const player = $.AVPlayer.playerWithURL(url);
+    ObjC.import('AVFoundation');
+    ObjC.import('CoreGraphics');
+    ObjC.import('QuartzCore');
+    // AVFoundation reexports the player classes from a subframework. Some
+    // versions of the JXA bridge omit them from $, even when they are loaded.
+    const framework = $.NSBundle.bundleWithPath('/System/Library/Frameworks/AVFoundation.framework');
+    if (!framework.load) throw Error('Could not load AVFoundation');
+    const Player = $.NSClassFromString('AVPlayer');
+    const PlayerLayer = $.NSClassFromString('AVPlayerLayer');
+    if (Player.isNil() || PlayerLayer.isNil()) throw Error('AVFoundation player classes are unavailable');
+    const player = Player.playerWithURL(url);
     player.muted = true;
-    player.actionAtItemEnd = $.AVPlayerActionAtItemEndPause;
-    const layer = $.AVPlayerLayer.playerLayerWithPlayer(player);
-    layer.videoGravity = $.AVLayerVideoGravityResizeAspectFill;
+    // A single-item AVPlayer pauses at the end by default.
+    const layer = PlayerLayer.playerLayerWithPlayer(player);
+    layer.videoGravity = $('resizeAspectFill');
     const window = $.NSWindow.alloc.initWithContentRectStyleMaskBackingDefer(
         screen.frame, $.NSWindowStyleMaskBorderless, $.NSBackingStoreBuffered, false);
     window.releasedWhenClosed = false;
@@ -95,15 +102,17 @@ function pumpEvents(seconds) {
 }
 
 function playbackFailed(player) {
-    return player.currentItem.status === $.AVPlayerItemStatusFailed || player.status === $.AVPlayerStatusFailed;
+    // AVPlayerItemStatusFailed and AVPlayerStatusFailed both have raw value 2.
+    return player.currentItem.status === 2 || player.status === 2;
 }
 
 function playbackFinished(overlay) {
     const player = overlay.player;
     if (playbackFailed(player)) return true;
     const state = player.timeControlStatus;
-    if (state === $.AVPlayerTimeControlStatusPlaying) overlay.started = true;
-    return overlay.started && state === $.AVPlayerTimeControlStatusPaused;
+    // AVPlayerTimeControlStatus uses 2 for playing and 0 for paused.
+    if (state === 2) overlay.started = true;
+    return overlay.started && state === 0;
 }
 
 function presentScene(resources, scene, screens) {

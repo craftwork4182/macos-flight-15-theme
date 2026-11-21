@@ -39,7 +39,10 @@ function run(argv) {
         overlay.window.close;
     }
     if (!sawFrame || !overlay.started || !finished || playbackFailed(overlay.player)) {
-        throw Error('The first intro did not play to its end');
+        throw Error('The first intro did not play to its end: ' + JSON.stringify({
+            sawFrame, started: overlay.started, finished, playerStatus: overlay.player.status,
+            itemStatus: overlay.player.currentItem.status, timeControlStatus: overlay.player.timeControlStatus
+        }));
     }
 
     const workspace = $.NSWorkspace.sharedWorkspace;
