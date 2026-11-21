@@ -17,7 +17,7 @@ function sceneTitle(name) {
     return name.slice(0, 2) + '   ' + words.charAt(0).toUpperCase() + words.slice(1);
 }
 
-function chooseScene(names, resources, defaults, reduceMotion) {
+function scenePicker(names, defaults, reduceMotion) {
     const last = ObjC.unwrap(defaults.stringForKey('LastScene'));
     const menu = $.NSPopUpButton.alloc.initWithFramePullsDown($.NSMakeRect(0, 36, 302, 28), false);
     menu.addItemsWithTitles($(names.map(sceneTitle)));
@@ -39,11 +39,22 @@ function chooseScene(names, resources, defaults, reduceMotion) {
     alert.addButtonWithTitle('Set Wallpaper');
     alert.addButtonWithTitle('Cancel');
     alert.addButtonWithTitle('Show Theme Files');
-    const response = alert.runModal;
-    if (response === $.NSAlertThirdButtonReturn) $.NSWorkspace.sharedWorkspace.openURL(resources);
-    if (response !== $.NSAlertFirstButtonReturn) return null;
-    if (!reduceMotion) defaults.setBoolForKey(motion.state === 1, 'PlayIntro');
-    return {name: names[menu.indexOfSelectedItem], animate: motion.state === 1};
+    return {
+        alert,
+        selection() {
+            // JXA can return an NSInteger as a string on 64-bit Macs.
+            const animate = Number(motion.state) === 1;
+            if (!reduceMotion) defaults.setBoolForKey(animate, 'PlayIntro');
+            return {name: names[Number(menu.indexOfSelectedItem)], animate};
+        }
+    };
+}
+
+function chooseScene(picker, resources) {
+    const response = Number(picker.alert.runModal);
+    if (response === Number($.NSAlertThirdButtonReturn)) $.NSWorkspace.sharedWorkspace.openURL(resources);
+    if (response !== Number($.NSAlertFirstButtonReturn)) return null;
+    return picker.selection();
 }
 
 function applyWallpaper(url, screens) {
@@ -103,13 +114,13 @@ function pumpEvents(seconds) {
 
 function playbackFailed(player) {
     // AVPlayerItemStatusFailed and AVPlayerStatusFailed both have raw value 2.
-    return player.currentItem.status === 2 || player.status === 2;
+    return Number(player.currentItem.status) === 2 || Number(player.status) === 2;
 }
 
 function playbackFinished(overlay) {
     const player = overlay.player;
     if (playbackFailed(player)) return true;
-    const state = player.timeControlStatus;
+    const state = Number(player.timeControlStatus);
     // AVPlayerTimeControlStatus uses 2 for playing and 0 for paused.
     if (state === 2) overlay.started = true;
     return overlay.started && state === 0;
@@ -168,7 +179,7 @@ function run() {
         const defaults = $.NSUserDefaults.standardUserDefaults;
         defaults.registerDefaults($({LastScene: '', PlayIntro: true}));
         const reduceMotion = $.NSWorkspace.sharedWorkspace.accessibilityDisplayShouldReduceMotion;
-        const scene = chooseScene(names, resources, defaults, reduceMotion);
+        const scene = chooseScene(scenePicker(names, defaults, reduceMotion), resources);
         if (!scene) return;
         const displays = $.NSScreen.screens;
         const screens = [];

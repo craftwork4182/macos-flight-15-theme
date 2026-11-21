@@ -1,5 +1,4 @@
-// Appended to Flight15.js on the disposable macOS runner. This run handler
-// exercises the same native functions as the picker without a modal dialog.
+// Appended to Flight15.js on the disposable macOS runner.
 function run(argv) {
     $.NSApplication.sharedApplication;
     const resources = $.NSURL.fileURLWithPath(argv[0]).URLByAppendingPathComponent('Contents/Resources/Flight15');
@@ -20,6 +19,17 @@ function run(argv) {
 
     const screen = $.NSScreen.mainScreen;
     if (screen.isNil()) return 'Bundle and profiles passed; no display attached for the playback check.';
+    const defaults = $.NSUserDefaults.alloc.initWithSuiteName('io.github.craftwork4182.flight15.smoke');
+    defaults.setObjectForKey($(''), 'LastScene');
+    defaults.setBoolForKey(true, 'PlayIntro');
+    const picker = scenePicker(names, defaults, false);
+    const confirm = picker.alert.buttons.objectAtIndex(0);
+    confirm.performSelectorWithObjectAfterDelayInModes('performClick:', null, 0.3,
+        $.NSArray.arrayWithObject($.NSModalPanelRunLoopMode));
+    const selected = chooseScene(picker, resources);
+    if (!selected || selected.name !== names[0] || !selected.animate) {
+        throw Error('The scene picker did not accept the selected wallpaper and intro');
+    }
     const clip = resources.URLByAppendingPathComponent('Intros/' + names[0] + '.mp4');
     const overlay = introWindow(clip, screen);
     let sawFrame = false;
@@ -57,5 +67,5 @@ function run(argv) {
             throw Error(ObjC.unwrap(error[0].localizedDescription));
         }
     }
-    return 'Bundle, profiles, playback and wallpaper checks passed.';
+    return 'Bundle, profiles, scene picker, playback and wallpaper checks passed.';
 }

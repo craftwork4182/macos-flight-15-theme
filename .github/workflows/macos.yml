@@ -11,6 +11,7 @@ jobs:
       - name: Build the application bundle
         run: bash "./Install Flight 15.command" --build "$RUNNER_TEMP/theme"
       - name: Check the bundle with AppKit and AVFoundation
+        timeout-minutes: 2
         run: |
           cat macos/Flight15.js tests/native-smoke.js > "$RUNNER_TEMP/check.js"
           osascript -l JavaScript "$RUNNER_TEMP/check.js" "$RUNNER_TEMP/theme/Flight 15.app"
